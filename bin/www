@@ -9,8 +9,6 @@ var app = require('../app');
 var debug = require('debug')('meu-rpg:server');
 var http = require('http');
 var models = require('../models');
-const localtunnel = require('localtunnel');
-const firebase = require('firebase');
 
 /**
  * Get port from environment and store in Express.
@@ -23,48 +21,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-(async () => {
-  firebase.initializeApp({
-    apiKey: "AIzaSyDmA04Fo_w5ajN9X2FxrAVSztIEc-HkSFI",
-    authDomain: "bomsono-b6b34.firebaseapp.com",
-    projectId: "bomsono-b6b34",
-    storageBucket: "bomsono-b6b34.appspot.com",
-    messagingSenderId: "156021453932",
-    appId: "1:156021453932:web:b208f6a55f981300301449"
-  });
-  const tunnel = await localtunnel({ port: port });
-
-  tunnel.url;
-  firebase.database().ref('url').set({ "url": tunnel.url });
-  console.log(tunnel.url);
-
-  // tunnel.on('close', () => {
-  // });
-})();
-
-/**
- * Conecta ao firebase e manda o link de acesso.
- */
-// async function borala() {
-//   firebase.initializeApp({
-//     apiKey: "AIzaSyDmA04Fo_w5ajN9X2FxrAVSztIEc-HkSFI",
-//     authDomain: "bomsono-b6b34.firebaseapp.com",
-//     projectId: "bomsono-b6b34",
-//     storageBucket: "bomsono-b6b34.appspot.com",
-//     messagingSenderId: "156021453932",
-//     appId: "1:156021453932:web:b208f6a55f981300301449"
-//   });
-//   var url = await ngrok.connect(port);
-//   firebase.database().ref('url').set({ "url": url });
-//   console.log(url);
-// }
-
-// /**
-//  * chama a função de acesso ao novo link gerado
-//  */
-
-// borala();
-
 
 /**
  * Listen on provided port, on all network interfaces.
